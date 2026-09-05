@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ producto.nombre }} SBLingerie
+{% endblock %}
+
+{% block content %}
+
+<section class="producto-detalle">
+
+    <div class="producto-imagen">
+        <img 
+            src="{{ producto.imagen.url }}" 
+            alt="{{ producto.nombre }}"
+        >
+    </div>
+
+    <div class="producto-info">
+
+        <h1>{{ producto.nombre }}</h1>
+
+        <p>{{ producto.descripcion }}</p>
+
+        <h2>${{ producto.precio }}</h2>
+
+        <button>
+            Agregar al carrito
+        </button>
+
+    </div>
+
+</section>
+
+{% endblock %}
