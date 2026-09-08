@@ -1,32 +1,71 @@
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> <html lang="es"> <head>
+<meta charset="UTF-8">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}SBLingerie{% endblock %}</title>
+<title>
+    {% block title %}SBLingerie{% endblock %}
+</title>
 
-    <link rel="icon" href="{% static 'Imagenes/LogoRedondeado.png' %}" type="image/png">
-    <link rel="stylesheet" href="{% static 'css/Home.css' %}">
+<link
+    rel="icon"
+    href="{% static 'Imagenes/LogoRedondeado.png' %}"
+    type="image/png"
+>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Alex+Brush&display=swap" rel="stylesheet">
-</head>
+<!-- CSS GENERAL -->
+<link
+    rel="stylesheet"
+    href="{% static 'css/base.css' %}"
+>
 
-</head>
+<!-- HEADER -->
+<link
+    rel="stylesheet"
+    href="{% static 'css/header.css' %}"
+>
 
-<body>
-    {% include 'includes/header.html' %}
+<!-- FOOTER -->
+<link
+    rel="stylesheet"
+    href="{% static 'css/footer.css' %}"
+>
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+<!-- RESPONSIVE -->
+<link
+    rel="stylesheet"
+    href="{% static 'css/responsive.css' %}"
+>
 
-    {% include 'includes/footer.html' %}
-</body>
-</html>
+<!-- FUENTES -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Alex+Brush&display=swap"
+    rel="stylesheet"
+>
+
+{% block extra_css %}
+{% endblock %}
+
+</head> <body>
+{% include 'includes/header.html' %}
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+{% include 'includes/footer.html' %}
+
+</body> </html>

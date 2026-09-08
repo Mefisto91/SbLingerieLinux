@@ -1,34 +1,313 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
-{{ producto.nombre }} SBLingerie
+{{ producto.name }} | SBLingerie
 {% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/productos.css' %}"
+>
+
+{% endblock %}
+
 
 {% block content %}
 
 <section class="producto-detalle">
 
-    <div class="producto-imagen">
-        <img 
-            src="{{ producto.imagen.url }}" 
-            alt="{{ producto.nombre }}"
-        >
+    <!-- ==================================================
+         GALERÍA DE PRODUCTO
+    ================================================== -->
+
+    <div class="producto-galeria">
+
+        <!-- IMAGEN PRINCIPAL -->
+
+        <div class="producto-imagen-principal">
+
+            {% for imagen in producto.images.all %}
+
+                {% if imagen.is_primary %}
+
+                    <img
+                        id="imagen-principal"
+                        src="{{ imagen.image.url }}"
+                        alt="{{ producto.name }}"
+                    >
+
+                {% endif %}
+
+            {% empty %}
+
+                <div class="producto-sin-imagen">
+
+                    <p>
+                        Producto sin imagen
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- ==================================================
+             MINIATURAS
+        ================================================== -->
+
+        <div class="producto-miniaturas">
+
+            {% for imagen in producto.images.all %}
+
+                <button
+                    type="button"
+                    class="miniatura {% if imagen.is_primary %}miniatura-activa{% endif %}"
+                    onclick="cambiarImagen('{{ imagen.image.url }}', this)"
+                >
+
+                    <img
+                        src="{{ imagen.image.url }}"
+                        alt="{{ producto.name }}"
+                    >
+
+                </button>
+
+            {% empty %}
+
+                <p>
+                    No hay imágenes disponibles.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
     </div>
 
-    <div class="producto-info">
 
-        <h1>{{ producto.nombre }}</h1>
+    <!-- ==================================================
+         INFORMACIÓN DEL PRODUCTO
+    ================================================== -->
 
-        <p>{{ producto.descripcion }}</p>
+    <div class="producto-detalle-informacion">
 
-        <h2>${{ producto.precio }}</h2>
+        <h1>
+            {{ producto.name }}
+        </h1>
 
-        <button>
-            Agregar al carrito
-        </button>
+
+        <p class="producto-precio">
+            ${{ producto.price }}
+        </p>
+
+
+        {% if producto.description %}
+
+            <div class="producto-descripcion">
+
+                <h2>
+                    Descripción
+                </h2>
+
+                <p>
+                    {{ producto.description }}
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+        <div class="producto-categoria">
+
+            <span>
+                Categoría:
+            </span>
+
+            <a
+                href="{% url 'myDjangoApp:categoria' slug=producto.category.slug %}"
+            >
+                {{ producto.category.name|title }}
+            </a>
+
+        </div>
+
+
+        <!-- ==================================================
+             BOTONES
+        ================================================== -->
+
+        <div class="producto-botones">
+
+            <a
+                href="{% url 'myDjangoApp:categoria' slug=producto.category.slug %}"
+                class="boton-volver"
+            >
+                Volver a {{ producto.category.name|title }}
+            </a>
+
+
+            <a
+                href="{% url 'myDjangoApp:home' %}"
+                class="boton-volver"
+            >
+                Volver al inicio
+            </a>
+
+        </div>
 
     </div>
 
 </section>
+
+
+<!-- ==================================================
+     JAVASCRIPT GALERÍA Y ZOOM
+================================================== -->
+
+<script>
+
+function cambiarImagen(url, miniatura) {
+
+    const imagenPrincipal =
+        document.getElementById("imagen-principal");
+
+
+    if (imagenPrincipal) {
+
+        imagenPrincipal.src = url;
+
+        /*
+         * Cada vez que cambiamos de imagen,
+         * el zoom vuelve al centro.
+         */
+
+        imagenPrincipal.style.transformOrigin =
+            "center center";
+    }
+
+
+    const miniaturas =
+        document.querySelectorAll(".miniatura");
+
+
+    miniaturas.forEach(function(elemento) {
+
+        elemento.classList.remove(
+            "miniatura-activa"
+        );
+
+    });
+
+
+    miniatura.classList.add(
+        "miniatura-activa"
+    );
+}
+
+
+/* ==================================================
+   ZOOM DE LA IMAGEN
+================================================== */
+
+const contenedorImagen =
+    document.querySelector(
+        ".producto-imagen-principal"
+    );
+
+
+const imagenPrincipal =
+    document.getElementById(
+        "imagen-principal"
+    );
+
+
+if (contenedorImagen && imagenPrincipal) {
+
+
+    /*
+     * Cuando el cursor entra en la imagen,
+     * activamos el zoom.
+     */
+
+    contenedorImagen.addEventListener(
+        "mouseenter",
+        function() {
+
+            contenedorImagen.classList.add(
+                "zoom-activo"
+            );
+
+        }
+    );
+
+
+    /*
+     * Mientras movemos el cursor,
+     * calculamos exactamente dónde está
+     * y hacemos que el zoom se enfoque
+     * en ese punto.
+     */
+
+    contenedorImagen.addEventListener(
+        "mousemove",
+        function(evento) {
+
+            const rect =
+                contenedorImagen.getBoundingClientRect();
+
+
+            const x =
+                evento.clientX - rect.left;
+
+
+            const y =
+                evento.clientY - rect.top;
+
+
+            const porcentajeX =
+                (x / rect.width) * 100;
+
+
+            const porcentajeY =
+                (y / rect.height) * 100;
+
+
+            imagenPrincipal.style.transformOrigin =
+                `${porcentajeX}% ${porcentajeY}%`;
+
+        }
+    );
+
+
+    /*
+     * Cuando sacamos el cursor,
+     * quitamos el zoom y devolvemos
+     * el punto de origen al centro.
+     */
+
+    contenedorImagen.addEventListener(
+        "mouseleave",
+        function() {
+
+            contenedorImagen.classList.remove(
+                "zoom-activo"
+            );
+
+
+            imagenPrincipal.style.transformOrigin =
+                "center center";
+
+        }
+    );
+
+}
+
+</script>
 
 {% endblock %}

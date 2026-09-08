@@ -1,10 +1,7 @@
 from django.db import models
-
 from .CategoryModel import Category
 
-
 class Product(models.Model):
-
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
@@ -22,12 +19,6 @@ class Product(models.Model):
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2
-    )
-
-    image = models.ImageField(
-        upload_to="productos/",
-        blank=True,
-        null=True
     )
 
     def __str__(self):

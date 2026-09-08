@@ -1,0 +1,259 @@
+/* ==================================================
+   PÁGINA DE CATEGORÍA
+================================================== */
+
+.categorias {
+    width: 100%;
+    padding: 80px 30px;
+    background-color: #ffffff;
+}
+
+
+/* ==================================================
+   TÍTULO DE CATEGORÍA
+================================================== */
+
+.categorias .seccion-titulo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.categorias .seccion-titulo h2 {
+    font-family: "Alex Brush", cursive;
+    font-size: 50px;
+    font-weight: normal;
+    color: #000000;
+}
+
+.categorias .seccion-titulo p {
+    font-family: "Alegreya", serif;
+    font-size: 18px;
+    margin-top: 5px;
+    color: #555555;
+}
+
+
+/* ==================================================
+   GRID DE PRODUCTOS
+================================================== */
+
+.categorias .productos-grid {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 30px;
+}
+
+
+/* ==================================================
+   TARJETA DE PRODUCTO
+================================================== */
+
+.categorias .producto-card {
+    display: block;
+
+    background-color: #ffffff;
+
+    text-decoration: none;
+    color: #000000;
+
+    text-align: center;
+
+    padding-bottom: 20px;
+
+    overflow: hidden;
+
+    transition: transform 0.3s ease;
+}
+
+.categorias .producto-card:hover {
+    transform: translateY(-5px);
+}
+
+
+/* ==================================================
+   IMÁGENES DE PRODUCTOS
+   FORMATO 9:16
+================================================== */
+
+.categorias .producto-card img {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+/* ==================================================
+   NOMBRE DEL PRODUCTO
+================================================== */
+
+.categorias .producto-card h3 {
+    font-family: "Alegreya", serif;
+
+    font-size: 22px;
+    font-weight: normal;
+
+    margin-top: 15px;
+
+    color: #000000;
+}
+
+
+/* ==================================================
+   PRECIO
+================================================== */
+
+.categorias .producto-card p {
+    font-family: "Alegreya", serif;
+
+    font-size: 18px;
+
+    color: #B8AD81;
+
+    margin: 8px 0;
+}
+
+
+/* ==================================================
+   SIN IMAGEN
+================================================== */
+
+.categorias .producto-sin-imagen {
+    width: 100%;
+
+    aspect-ratio: 9 / 16;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: #f8f7f3;
+
+    color: #555555;
+
+    font-family: "Alegreya", serif;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media screen and (max-width: 1024px) {
+
+    .categorias {
+        padding: 70px 25px;
+    }
+
+    .categorias .productos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px;
+    }
+
+}
+
+
+/* ==================================================
+   MÓVIL
+================================================== */
+
+@media screen and (max-width: 600px) {
+
+    .categorias {
+        padding: 60px 20px;
+    }
+
+    .categorias .seccion-titulo {
+        margin-bottom: 30px;
+    }
+
+    .categorias .seccion-titulo h2 {
+        font-size: 42px;
+        line-height: 1.1;
+    }
+
+    .categorias .seccion-titulo p {
+        font-size: 17px;
+    }
+
+    .categorias .productos-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .categorias .producto-card {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .categorias .producto-card h3 {
+        font-size: 21px;
+    }
+
+    .categorias .producto-card p {
+        font-size: 17px;
+    }
+
+}
+
+
+/* ==================================================
+   MÓVILES MUY PEQUEÑOS
+================================================== */
+
+@media screen and (max-width: 380px) {
+
+    .categorias {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .categorias .seccion-titulo h2 {
+        font-size: 37px;
+    }
+
+}
+
+/* ==================================================
+BOTÓN VOLVER
+================================================== */
+
+.categoria-volver {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 50px;
+    padding-bottom: 10px;
+}
+
+.categoria-volver .boton-volver {
+    display: inline-block;
+
+    padding: 12px 30px;
+
+    background-color: #000000;
+    color: #B8AD81;
+
+    border: 2px solid #B8AD81;
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-family: "Alegreya", serif;
+    font-size: 18px;
+
+    transition: all 0.3s ease;
+}
+
+.categoria-volver .boton-volver:hover {
+    background-color: #B8AD81;
+    color: #000000;
+}

@@ -1,0 +1,432 @@
+/* ==================================================
+   RESPONSIVE GENERAL
+================================================== */
+
+
+/* ==================================================
+   TABLETS
+   Hasta 1024px
+================================================== */
+
+@media screen and (max-width: 1024px) {
+
+    /* =========================
+       CONTENEDOR GENERAL
+    ========================== */
+
+    .contenedor {
+        padding: 0 20px;
+        gap: 25px;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    #Titulo {
+        font-size: 40px;
+    }
+
+    #Eslogan {
+        font-size: 25px;
+    }
+
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+        padding: 70px 25px;
+    }
+
+    .hero-contenido {
+        max-width: 800px;
+    }
+
+    .hero-contenido h1 {
+        font-size: 65px;
+    }
+
+    .hero-contenido h2 {
+        font-size: 42px;
+    }
+
+    .hero-contenido p {
+        font-size: 22px;
+    }
+
+
+    /* =========================
+       CATEGORÍAS
+    ========================== */
+
+    .categorias-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px;
+    }
+
+
+    /* =========================
+       PRODUCTOS
+    ========================== */
+
+    .productos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px;
+    }
+
+
+    /* =========================
+       SOBRE NOSOTROS
+    ========================== */
+
+    .sobre-nosotros {
+        gap: 30px;
+        padding: 70px 25px;
+    }
+
+    .sobre-nosotros-imagen,
+    .sobre-nosotros-contenido {
+        min-width: 0;
+    }
+
+}
+
+
+/* ==================================================
+   MÓVILES
+   Hasta 600px
+================================================== */
+
+@media screen and (max-width: 600px) {
+
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
+        padding: 15px 0;
+    }
+
+    .contenedor {
+        width: 100%;
+        padding: 0 15px;
+
+        flex-direction: column;
+        gap: 10px;
+
+        text-align: center;
+    }
+
+    .logo-titulo {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .img-pequena {
+        width: 60px;
+    }
+
+    #Titulo {
+        font-size: 35px;
+        line-height: 1;
+    }
+
+    #Eslogan {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+        min-height: auto;
+        padding: 70px 20px;
+    }
+
+    .hero-contenido {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero-contenido h1 {
+        font-size: clamp(42px, 13vw, 55px);
+        line-height: 1.1;
+    }
+
+    .hero-contenido h2 {
+        font-size: clamp(25px, 8vw, 32px);
+        line-height: 1.2;
+    }
+
+    .hero-contenido p {
+        font-size: 17px;
+        line-height: 1.5;
+    }
+
+
+    /* =========================
+       BOTONES
+    ========================== */
+
+    .btn {
+        max-width: 100%;
+        padding: 12px 25px;
+    }
+
+
+    /* =========================
+       TÍTULOS
+    ========================== */
+
+    .seccion-titulo {
+        margin-bottom: 30px;
+    }
+
+    .seccion-titulo h2 {
+        font-size: 42px;
+        line-height: 1.1;
+    }
+
+    .seccion-titulo p {
+        font-size: 17px;
+    }
+
+
+    /* =========================
+       CATEGORÍAS
+    ========================== */
+
+    .categorias {
+        padding: 60px 20px;
+    }
+
+    .categorias-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .categoria-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+
+    /* =========================
+       PRODUCTOS
+    ========================== */
+
+    .productos-destacados {
+        padding: 60px 20px;
+    }
+
+    .productos-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .producto-card {
+        width: 100%;
+    }
+
+    .producto-card h3 {
+        font-size: 21px;
+    }
+
+    .producto-card p {
+        font-size: 17px;
+    }
+
+
+    /* =========================
+       CATEGORÍA - PRODUCTOS
+       
+       IMPORTANTE:
+       Las imágenes de categoría
+       conservan formato 9:16,
+       igual que las del Home.
+    ========================== */
+
+    .categoria-productos {
+        padding: 60px 20px;
+    }
+
+    .categoria-productos .productos-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .categoria-productos .producto-card {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .categoria-productos .producto-card img {
+        width: 100%;
+        aspect-ratio: 9 / 16;
+        object-fit: cover;
+    }
+
+
+    /* =========================
+       SOBRE NOSOTROS
+    ========================== */
+
+    .sobre-nosotros {
+        width: 100%;
+        padding: 60px 20px;
+
+        flex-direction: column;
+        gap: 35px;
+
+        text-align: center;
+    }
+
+    .sobre-nosotros-imagen,
+    .sobre-nosotros-contenido {
+        width: 100%;
+    }
+
+    .sobre-nosotros-imagen img {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .sobre-nosotros-contenido h2 {
+        font-size: 45px;
+        line-height: 1.1;
+    }
+
+    .sobre-nosotros-contenido p {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+
+    /* =========================
+       CONTACTO
+    ========================== */
+
+    .contacto {
+        padding: 40px 20px;
+    }
+
+    .contacto h2 {
+        font-size: 45px;
+    }
+
+    .contacto p {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+        padding: 25px 15px;
+    }
+
+    .pedido {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .eslogan-pedido {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .img-icono {
+        width: 35px;
+    }
+
+}
+
+
+/* ==================================================
+   MÓVILES MUY PEQUEÑOS
+   Hasta 380px
+================================================== */
+
+@media screen and (max-width: 380px) {
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    #Titulo {
+        font-size: 30px;
+    }
+
+    #Eslogan {
+        font-size: 18px;
+    }
+
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+        padding: 55px 15px;
+    }
+
+    .hero-contenido h1 {
+        font-size: 40px;
+    }
+
+    .hero-contenido h2 {
+        font-size: 25px;
+    }
+
+    .hero-contenido p {
+        font-size: 16px;
+    }
+
+
+    /* =========================
+       SECCIONES
+    ========================== */
+
+    .categorias,
+    .productos-destacados,
+    .sobre-nosotros {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .seccion-titulo h2 {
+        font-size: 37px;
+    }
+
+
+    /* =========================
+       CATEGORÍA
+    ========================== */
+
+    .categoria-productos {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    .eslogan-pedido {
+        font-size: 26px;
+    }
+
+}

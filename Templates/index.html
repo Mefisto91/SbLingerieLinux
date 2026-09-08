@@ -1,138 +1,180 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}
+SBLingerie
+{% endblock %}
 
-{% block title %} SBLingerie {% endblock %}
+{% block extra_css %}
 
-{% block content %}
-
-<!-- =========================
-     HERO / PRESENTACIÓN
-========================= -->
-<section class="hero">
-    <div class="hero-contenido">
-        <h2>Brilla a tu manera</h2>
-
-        <p>
-            Una selección de piezas creadas para realzar tu belleza, 
-            acompañar tus momentos y dejar una huella de elegancia.
-        </p>
-    </div>
-</section>
-
-
-<!-- =========================
-     CATEGORÍAS
-========================= -->
-<section class="categorias">
-    <div class="seccion-titulo">
-        <h2>Descubre nuestra colección</h2>
-        <p> 
-            Encuentra el estilo perfecto para ti.
-        </p>
-    </div>
-
-
-    <div class="categorias-grid">
-
-        <!-- LENCERÍA -->
-        <a href="{% url 'myDjangoApp:categoria' slug='lenceria' %}" class="categoria-card">   
-            <img
-            src="{% static 'Imagenes/Lenceria/Afrodita.jpg' %}"
-            alt="Lencería"
-            >
-            <h3>Lencería</h3>
-
-        </a>
-
-        <!-- JOYERÍA -->
-        <a href="{% url 'myDjangoApp:categoria' slug='joyeria' %}" class="categoria-card">
-            <img
-                src="{% static 'Imagenes/Lenceria/CadenaEsmeralda.jpeg' %}"
-                alt="Joyería"
-            >
-            <h3>Joyería</h3>
-        </a>
-    </div>
-
-
-</section>
-
-
-<!-- =========================
-     PRODUCTOS DESTACADOS
-========================= -->
-<section class="productos-destacados">
-
-    <div class="seccion-titulo">
-
-        <h2>Productos destacados</h2>
-
-        <p>
-            Conoce algunos de nuestros productos favoritos.
-        </p>
-
-    </div>
-
-
-    <div class="productos-grid">
-
-        {% for producto in productos_destacados %}
-
-            {% include 'includes/producto_card.html' %}
-
-        {% empty %}
-
-            <p>
-                Próximamente encontrarás nuestros productos destacados.
-            </p>
-
-        {% endfor %}
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     SOBRE NOSOTROS
-========================= -->
-<section class="sobre-nosotros">
-
-    <div class="sobre-nosotros-imagen">
-
-        <img
-            src="{% static 'Imagenes/LogoRedondeado.png' %}"
-            alt="SBLingerie"
-        >
-
-    </div>
-
-
-    <div class="sobre-nosotros-contenido">
-
-        <h2>Sobre SBLingerie</h2>
-
-        <p>
-            En SBLingerie creemos en la belleza de los detalles. 
-            Seleccionamos piezas de alta calidad que reflejan elegancia, 
-            sofisticación y personalidad, diseñadas para convertirse en 
-            parte de tu estilo y acompañarte en los momentos que 
-            merecen brillar.
-        </p>
-    </div>
-</section>
-
-
-<!-- =========================
-     CONTACTO
-========================= -->
-<section class="contacto">
-    <h2>¿Tienes alguna pregunta?</h2>
-    <p>
-        Estamos aquí para ayudarte.
-    </p>
-</section>
+<link rel="stylesheet" href="{% static 'css/home.css' %}" >
 
 {% endblock %}
 
+{% block content %}
+
+<!-- ========================= HERO / PRESENTACIÓN ========================= --> <section class="hero">
+<div class="hero-contenido">
+
+    <h2>
+        Brilla a tu manera
+    </h2>
+
+    <p>
+        Una selección de piezas creadas para realzar tu belleza,
+        acompañar tus momentos y dejar una huella de elegancia.
+    </p>
+
+</div>
+
+</section> <!-- ========================= CATEGORÍAS ========================= --> <section class="categorias">
+<div class="seccion-titulo">
+
+    <h2>
+        Descubre nuestra colección
+    </h2>
+
+    <p>
+        Encuentra el estilo perfecto para ti.
+    </p>
+
+</div>
+
+
+<div class="categorias-grid">
+
+    {% for categoria in categorias %}
+
+        <a
+            href="{% url 'myDjangoApp:categoria' slug=categoria.slug %}"
+            class="categoria-card"
+        >
+
+            {% if categoria.image %}
+
+                <img
+                    src="{{ categoria.image.url }}"
+                    alt="{{ categoria.name }}"
+                >
+
+            {% else %}
+
+                <div class="categoria-sin-imagen">
+                    Sin imagen
+                </div>
+
+            {% endif %}
+
+
+            <h3>
+                {{ categoria.name|title }}
+            </h3>
+
+        </a>
+
+    {% empty %}
+
+        <p>
+            No hay categorías disponibles.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+</section> <!-- ========================= PRODUCTOS DESTACADOS ========================= --> <section class="productos-destacados">
+<div class="seccion-titulo">
+
+    <h2>
+        Productos destacados
+    </h2>
+
+    <p>
+        Conoce algunos de nuestros productos favoritos.
+    </p>
+
+</div>
+
+
+<div class="productos-grid">
+
+    {% for producto in productos_destacados %}
+
+        <div class="producto-card">
+
+            {% for imagen in producto.imagenes_principales %}
+
+                <img
+                    src="{{ imagen.image.url }}"
+                    alt="{{ producto.name }}"
+                    class="producto-imagen"
+                >
+
+            {% empty %}
+
+                <div class="producto-sin-imagen">
+                    Sin imagen
+                </div>
+
+            {% endfor %}
+
+
+            <h3>
+                {{ producto.name }}
+            </h3>
+
+            <p>
+                ${{ producto.price }}
+            </p>
+
+        </div>
+
+    {% empty %}
+
+        <p>
+            Próximamente encontrarás nuestros productos destacados.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+</section> <!-- ========================= SOBRE NOSOTROS ========================= --> <section class="sobre-nosotros">
+<div class="sobre-nosotros-imagen">
+
+    <img
+        src="{% static 'Imagenes/LogoRedondeado.png' %}"
+        alt="SBLingerie"
+    >
+
+</div>
+
+
+<div class="sobre-nosotros-contenido">
+
+    <h2>
+        Sobre SBLingerie
+    </h2>
+
+    <p>
+        En SBLingerie creemos en la belleza de los detalles.
+        Seleccionamos piezas de alta calidad que reflejan elegancia,
+        sofisticación y personalidad, diseñadas para convertirse en
+        parte de tu estilo y acompañarte en los momentos que
+        merecen brillar.
+    </p>
+
+</div>
+
+</section> <!-- ========================= CONTACTO ========================= --> <section class="contacto">
+<h2>
+    ¿Tienes alguna pregunta?
+</h2>
+
+<p>
+    Estamos aquí para ayudarte.
+</p>
+
+</section>
+
+{% endblock %}

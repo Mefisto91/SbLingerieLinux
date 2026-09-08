@@ -11,5 +11,11 @@ class Category(models.Model):
         unique=True
     )
 
+    image = models.ImageField(
+        upload_to="categorias/",
+        blank=True,
+        null=True
+    )
+
     def __str__(self):
         return self.name

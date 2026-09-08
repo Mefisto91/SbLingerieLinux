@@ -1,0 +1,35 @@
+/* ==================================================
+FOOTER
+================================================== */
+
+footer {
+width: 100%;
+background-color: #000000;
+color: #B8AD81;
+padding: 30px 0;
+}
+
+.pedido {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 50px;
+flex-wrap: wrap;
+}
+
+.eslogan-pedido {
+font-family: "Alegreya", serif;
+font-size: 40px;
+color: #B8AD81;
+}
+
+.img-icono {
+width: 60px;
+height: auto;
+cursor: pointer;
+transition: transform 0.2s ease;
+}
+
+.img-icono:hover {
+transform: scale(1.2);
+}

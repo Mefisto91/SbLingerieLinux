@@ -1,0 +1,73 @@
+/* ==================================================
+RESET
+================================================== */
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+background-color: #ffffff;
+color: #222;
+}
+
+/* ==================================================
+FUENTES
+================================================== */
+
+.alex-brush-regular {
+font-family: "Alex Brush", cursive;
+font-style: normal;
+font-size: 25px;
+}
+
+.alegreya-eslogan {
+font-family: "Alegreya", serif;
+font-optical-sizing: auto;
+font-style: normal;
+}
+
+/* ==================================================
+MAIN
+================================================== */
+
+main {
+flex: 1;
+}
+
+/* ==================================================
+BOTONES GENERALES
+================================================== */
+
+.btn {
+display: inline-block;
+padding: 12px 30px;
+
+background-color: #B8AD81;
+color: #000000;
+
+text-decoration: none;
+
+font-family: "Alegreya", serif;
+font-size: 18px;
+
+border: 2px solid #B8AD81;
+
+transition: all 0.3s ease;
+
+
+}
+
+.btn:hover {
+background-color: transparent;
+color: #B8AD81;
+}

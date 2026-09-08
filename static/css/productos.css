@@ -1,0 +1,450 @@
+/* ==================================================
+   DETALLE DEL PRODUCTO
+================================================== */
+
+.producto-detalle {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+    padding: 80px 30px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(350px, 0.9fr);
+
+    gap: 70px;
+
+    align-items: start;
+}
+
+
+/* ==================================================
+   GALERÍA
+================================================== */
+
+.producto-galeria {
+    width: 100%;
+}
+
+.producto-imagen-principal {
+    width: 100%;
+    background-color: var(--color-crema);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.producto-imagen-principal img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transform: scale(1);
+    transform-origin: center center;
+    transition: transform 0.15s ease-out;
+}
+
+/* ==================================================
+   ZOOM
+================================================== */
+
+.producto-imagen-principal.zoom-activo img {
+    transform: scale(1.9);
+}
+
+
+/* ==================================================
+   MINIATURAS
+================================================== */
+
+.producto-miniaturas {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 12px;
+
+    margin-top: 15px;
+
+    width: 100%;
+}
+
+
+.miniatura {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+
+    padding: 0;
+
+    border: 2px solid transparent;
+
+    border-radius: 8px;
+
+    background-color: transparent;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.3s ease,
+        transform 0.2s ease;
+}
+
+
+.miniatura img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+.miniatura:hover {
+    border-color: var(--color-dorado);
+
+    transform: translateY(-3px);
+}
+
+
+.miniatura-activa {
+    border-color: var(--color-dorado);
+}
+
+
+/* ==================================================
+   INFORMACIÓN DEL PRODUCTO
+================================================== */
+
+.producto-detalle-informacion {
+    padding-top: 10px;
+}
+
+
+.producto-detalle-informacion h1 {
+    font-family: "Alex Brush", cursive;
+
+    font-size: 65px;
+    font-weight: normal;
+
+    line-height: 1.1;
+
+    color: var(--color-negro);
+
+    margin-bottom: 20px;
+}
+
+
+.producto-precio {
+    font-family: "Alegreya", serif;
+
+    font-size: 28px;
+
+    color: var(--color-dorado);
+
+    margin-bottom: 35px;
+}
+
+
+/* ==================================================
+   DESCRIPCIÓN
+================================================== */
+
+.producto-descripcion {
+    margin-bottom: 35px;
+}
+
+
+.producto-descripcion h2 {
+    font-family: "Alegreya", serif;
+
+    font-size: 24px;
+    font-weight: normal;
+
+    margin-bottom: 10px;
+}
+
+
+.producto-descripcion p {
+    font-family: "Alegreya", serif;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: var(--color-gris);
+}
+
+
+/* ==================================================
+   CATEGORÍA
+================================================== */
+
+.producto-categoria {
+    margin-bottom: 30px;
+
+    font-family: "Alegreya", serif;
+
+    font-size: 17px;
+}
+
+
+.producto-categoria span {
+    color: var(--color-gris);
+}
+
+
+.producto-categoria a {
+    color: var(--color-dorado);
+
+    text-decoration: none;
+}
+
+
+.producto-categoria a:hover {
+    text-decoration: underline;
+}
+
+
+/* ==================================================
+   BOTÓN VOLVER
+================================================== */
+
+.boton-volver {
+    display: inline-block;
+
+    padding: 12px 25px;
+
+    border: 2px solid var(--color-dorado);
+
+    background-color: var(--color-dorado);
+
+    color: var(--color-negro);
+
+    text-decoration: none;
+
+    font-family: "Alegreya", serif;
+
+    font-size: 17px;
+
+    transition: all 0.3s ease;
+}
+
+
+.boton-volver:hover {
+    background-color: transparent;
+
+    color: var(--color-dorado);
+}
+
+
+/* ==================================================
+   SIN IMAGEN
+================================================== */
+
+.producto-galeria .producto-sin-imagen {
+    width: 100%;
+
+    aspect-ratio: 9 / 16;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-crema);
+
+    color: var(--color-gris);
+
+    font-family: "Alegreya", serif;
+
+    border-radius: 10px;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media screen and (max-width: 1024px) {
+
+    .producto-detalle {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 40px;
+
+        padding: 60px 25px;
+    }
+
+    .producto-galeria {
+        max-width: 500px;
+    }
+
+    .producto-detalle-informacion h1 {
+        font-size: 55px;
+    }
+
+    .producto-precio {
+        font-size: 25px;
+    }
+
+    .producto-miniaturas {
+        grid-template-columns: repeat(5, 1fr);
+
+        gap: 8px;
+    }
+
+}
+
+
+/* ==================================================
+   MÓVIL
+================================================== */
+
+@media screen and (max-width: 700px) {
+
+    .producto-detalle {
+        width: 100%;
+
+        padding: 50px 20px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 40px;
+    }
+
+
+    .producto-galeria {
+        width: 100%;
+
+        max-width: 500px;
+
+        margin: 0 auto;
+    }
+
+
+    .producto-imagen-principal img {
+        aspect-ratio: 9 / 16;
+    }
+
+
+    .producto-miniaturas {
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: 8px;
+
+        overflow-x: visible;
+    }
+
+
+    .producto-detalle-informacion {
+        width: 100%;
+
+        padding-top: 0;
+
+        text-align: center;
+    }
+
+
+    .producto-detalle-informacion h1 {
+        font-size: 48px;
+    }
+
+
+    .producto-precio {
+        font-size: 24px;
+    }
+
+
+    .producto-descripcion p {
+        font-size: 17px;
+    }
+
+
+    .producto-categoria {
+        font-size: 16px;
+    }
+
+
+    .boton-volver {
+        width: 100%;
+
+        max-width: 300px;
+    }
+
+}
+
+
+/* ==================================================
+   MÓVILES PEQUEÑOS
+================================================== */
+
+@media screen and (max-width: 380px) {
+
+    .producto-detalle {
+        padding: 40px 15px;
+    }
+
+
+    .producto-detalle-informacion h1 {
+        font-size: 42px;
+    }
+
+
+    .producto-miniaturas {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+
+    .producto-precio {
+        font-size: 22px;
+    }
+
+}
+
+
+/* ==================================================
+BOTONES DEL PRODUCTO
+================================================== */
+
+.producto-botones {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    margin-top: 35px;
+}
+
+
+/* ==================================================
+BOTÓN VOLVER
+================================================== */
+
+.producto-botones .boton-volver {
+    display: inline-block;
+
+    padding: 12px 30px;
+
+    background-color: #000000;
+    color: #B8AD81;
+
+    border: 2px solid #B8AD81;
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-family: "Alegreya", serif;
+    font-size: 18px;
+
+    transition: all 0.3s ease;
+}
+
+.producto-botones .boton-volver:hover {
+    background-color: #B8AD81;
+    color: #000000;
+}

@@ -1,0 +1,293 @@
+/* ==================================================
+HERO
+================================================== */
+
+.hero {
+min-height: 300px;
+
+display: flex;
+align-items: center;
+justify-content: center;
+
+padding: 80px 30px;
+
+background: #f8f7f3;
+
+background-size: cover;
+background-position: center;
+
+color: #000000;
+text-align: center;
+
+
+}
+
+.hero-contenido {
+max-width: 900px;
+}
+
+.hero-contenido h1 {
+font-family: "Alex Brush", cursive;
+font-size: 80px;
+font-weight: normal;
+color: #B8AD81;
+margin-bottom: 10px;
+}
+
+.hero-contenido h2 {
+font-family: "Alex Brush", cursive;
+font-size: 50px;
+font-weight: normal;
+margin-bottom: 20px;
+}
+
+.hero-contenido p {
+font-family: "Alegreya", serif;
+font-size: 25px;
+line-height: 1.6;
+margin-bottom: 30px;
+}
+
+/* ==================================================
+TÍTULOS DE SECCIÓN
+================================================== */
+
+.seccion-titulo {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.seccion-titulo h2 {
+font-family: "Alex Brush", cursive;
+font-size: 50px;
+font-weight: normal;
+color: #000000;
+}
+
+.seccion-titulo p {
+font-family: "Alegreya", serif;
+font-size: 18px;
+margin-top: 5px;
+color: #555555;
+}
+
+/* ==================================================
+CATEGORÍAS DEL HOME
+================================================== */
+
+.categorias {
+width: 100%;
+padding: 80px 30px;
+background-color: #ffffff;
+}
+
+.categorias-grid {
+width: 100%;
+max-width: 1000px;
+margin: 0 auto;
+
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+
+gap: 40px;
+
+justify-items: center;
+
+
+}
+
+.categoria-card {
+width: 100%;
+max-width: 350px;
+
+display: flex;
+flex-direction: column;
+align-items: center;
+
+text-decoration: none;
+color: #000000;
+
+text-align: center;
+
+transition: transform 0.3s ease;
+
+
+}
+
+.categoria-card:hover {
+transform: translateY(-8px);
+}
+
+.categoria-card img {
+width: 100%;
+aspect-ratio: 9 / 16;
+
+display: block;
+
+object-fit: cover;
+
+border-radius: 10px;
+
+
+}
+
+.categoria-card h3 {
+width: 100%;
+
+margin-top: 15px;
+
+font-family: "Alegreya", serif;
+font-size: 24px;
+font-weight: normal;
+
+color: #000000;
+
+text-align: center;
+
+
+}
+
+/* ==================================================
+PRODUCTOS DESTACADOS
+================================================== */
+
+.productos-destacados {
+padding: 80px 30px;
+background-color: #f8f7f3;
+}
+
+.productos-grid {
+max-width: 1200px;
+margin: 0 auto;
+
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+
+gap: 30px;
+
+
+}
+
+.producto-card {
+background-color: #ffffff;
+
+text-align: center;
+
+padding-bottom: 20px;
+
+transition: transform 0.3s ease;
+
+
+}
+
+.producto-card:hover {
+transform: translateY(-5px);
+}
+
+.producto-card img {
+width: 100%;
+aspect-ratio: 1 / 1;
+
+object-fit: cover;
+
+display: block;
+
+
+}
+
+.producto-card h3 {
+font-family: "Alegreya", serif;
+font-size: 22px;
+font-weight: normal;
+
+margin-top: 15px;
+
+
+}
+
+.producto-card p {
+font-family: "Alegreya", serif;
+font-size: 18px;
+
+color: #B8AD81;
+
+margin: 8px 0;
+
+
+}
+
+.productos-boton {
+text-align: center;
+margin-top: 40px;
+}
+
+/* ==================================================
+SOBRE NOSOTROS
+================================================== */
+
+.sobre-nosotros {
+max-width: 1200px;
+margin: 0 auto;
+padding: 40px 30px;
+
+display: flex;
+align-items: center;
+
+gap: 60px;
+
+
+}
+
+.sobre-nosotros-imagen {
+flex: 1;
+text-align: center;
+}
+
+.sobre-nosotros-imagen img {
+width: 100%;
+max-width: 250px;
+}
+
+.sobre-nosotros-contenido {
+flex: 1;
+}
+
+.sobre-nosotros-contenido h2 {
+font-family: "Alex Brush", cursive;
+font-size: 55px;
+font-weight: normal;
+color: #000000;
+margin-bottom: 20px;
+}
+
+.sobre-nosotros-contenido p {
+font-family: "Alegreya", serif;
+font-size: 19px;
+line-height: 1.7;
+margin-bottom: 30px;
+}
+
+/* ==================================================
+CONTACTO
+================================================== */
+
+.contacto {
+padding: 40px 20px;
+background-color: #000000;
+color: #ffffff;
+text-align: center;
+}
+
+.contacto h2 {
+font-family: "Alex Brush", cursive;
+font-size: 50px;
+font-weight: normal;
+color: #B8AD81;
+margin: 0 0 5px;
+}
+
+.contacto p {
+font-family: "Alegreya", serif;
+font-size: 17px;
+margin: 0;
+}

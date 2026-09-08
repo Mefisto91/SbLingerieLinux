@@ -1,27 +1,38 @@
-from django.shortcuts import get_object_or_404
-from django.views.generic import ListView
+from django.views import View
+from django.shortcuts import render, get_object_or_404
+from django.db.models import Prefetch
 
 from ..models.CategoryModel import Category
+from ..models.ProductModel import Product
+from ..models.ProductImage import ProductImage
 
+class CategoryViewClass(View):
+    def get(self, request, slug):
 
-class CategoryViewClass(ListView):
-    template_name = "categoria.html"
-    context_object_name = "productos"
+        imagenes_principales = ProductImage.objects.filter(
+            is_primary=True
+        )
 
-    def get_queryset(self):
         categoria = get_object_or_404(
             Category,
-            slug=self.kwargs["slug"]
+            slug=slug
         )
 
-        return categoria.products.all()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context["categoria"] = get_object_or_404(
-            Category,
-            slug=self.kwargs["slug"]
+        productos = Product.objects.filter(
+            category=categoria
+        ).prefetch_related(
+            Prefetch(
+                "images",
+                queryset=imagenes_principales,
+                to_attr="imagenes_principales"
+            )
         )
 
-        return context
+        return render(
+            request,
+            "categoria.html",
+            {
+                "categoria": categoria,
+                "productos": productos,
+            }
+        )

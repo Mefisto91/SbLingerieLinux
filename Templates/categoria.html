@@ -2,19 +2,95 @@
 {% load static %}
 
 {% block title %}
-    {{ categoria|title }} | SBLingerie
+    SBLingerie
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/categoria.css' %}" >
+
 {% endblock %}
 
 {% block content %}
 
 <section class="categorias">
-    <div class="seccion-titulo">
-        <h2>{{ categoria|title }}</h2>
+<div class="seccion-titulo">
+
+    <h2>
+        {{ categoria.name|title }}
+    </h2>
+
+    <p>
+        Descubre nuestra colección de {{ categoria.name|lower }}.
+    </p>
+
+</div>
+
+
+
+<div class="productos-grid">
+
+    {% for producto in productos %}
+
+        <a
+            href="{% url 'myDjangoApp:producto_detalle' id=producto.id %}"
+            class="producto-card"
+        >
+
+            {% for imagen in producto.imagenes_principales %}
+
+                <img
+                    src="{{ imagen.image.url }}"
+                    alt="{{ producto.name }}"
+                    class="producto-imagen"
+                >
+
+            {% empty %}
+
+                <div class="producto-sin-imagen">
+
+                    <p>
+                        Producto sin imagen
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+
+            <h3>
+                {{ producto.name }}
+            </h3>
+
+
+            <p>
+                ${{ producto.price }}
+            </p>
+
+        </a>
+
+    {% empty %}
+
         <p>
-            Descubre nuestra colección de {{ categoria }}.
+            No hay productos disponibles en esta categoría.
         </p>
-    </div>
-    <!-- Aquí irán los productos -->
+
+    {% endfor %}
+</div>
+
+<!-- BOTÓN VOLVER AL HOME -->
+
+<div class="categoria-volver">
+
+    <a
+        href="{% url 'myDjangoApp:home' %}"
+        class="boton-volver"
+    >
+        Volver al inicio
+    </a>
+
+</div>
+
 </section>
 
 {% endblock %}
