@@ -26,22 +26,33 @@
     width: 100%;
 }
 
+
 .producto-imagen-principal {
     width: 100%;
+
     background-color: var(--color-crema);
+
     overflow: hidden;
+
     border-radius: 10px;
 }
+
 
 .producto-imagen-principal img {
     width: 100%;
     height: auto;
+
     display: block;
+
     object-fit: cover;
+
     transform: scale(1);
+
     transform-origin: center center;
+
     transition: transform 0.15s ease-out;
 }
+
 
 /* ==================================================
    ZOOM
@@ -71,6 +82,7 @@
 
 .miniatura {
     width: 100%;
+
     aspect-ratio: 9 / 16;
 
     padding: 0;
@@ -126,6 +138,7 @@
     font-family: "Alex Brush", cursive;
 
     font-size: 65px;
+
     font-weight: normal;
 
     line-height: 1.1;
@@ -148,6 +161,198 @@
 
 
 /* ==================================================
+   VARIANTES DEL PRODUCTO
+================================================== */
+
+.producto-variantes {
+    margin-top: 25px;
+
+    margin-bottom: 35px;
+
+    padding: 22px;
+
+    border: 1px solid #d8d2bd;
+
+    border-radius: 8px;
+
+    background-color: #faf9f5;
+}
+
+
+/* ==================================================
+   OPCIONES
+================================================== */
+
+.producto-opcion {
+    margin-bottom: 20px;
+}
+
+
+.producto-opcion:last-of-type {
+    margin-bottom: 0;
+}
+
+
+.producto-opcion label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-family: "Alegreya", serif;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    color: #000000;
+}
+
+
+/* ==================================================
+   BOTONES DE COLOR Y TALLA
+================================================== */
+
+.producto-opciones-botones {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 5px;
+}
+
+
+/* ==================================================
+   BOTÓN DE OPCIÓN
+================================================== */
+
+.opcion-boton {
+    min-width: 85px;
+
+    padding: 10px 18px;
+
+    border: 1px solid #000000;
+
+    border-radius: 4px;
+
+    background-color: #ffffff;
+
+    color: #000000;
+
+    font-family: "Alegreya", serif;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.2s ease;
+}
+
+
+/* ==================================================
+   HOVER
+================================================== */
+
+.opcion-boton:hover {
+    border-color: #B8AD81;
+
+    transform: translateY(-2px);
+}
+
+
+/* ==================================================
+   OPCIÓN SELECCIONADA
+================================================== */
+
+.opcion-boton-activo {
+    background-color: #000000;
+
+    color: #B8AD81;
+
+    border-color: #B8AD81;
+}
+
+
+.opcion-boton-activo:hover {
+    background-color: #000000;
+
+    color: #B8AD81;
+
+    border-color: #B8AD81;
+}
+
+
+/* ==================================================
+   TALLAS
+================================================== */
+
+.producto-tallas {
+    margin-top: 5px;
+}
+
+
+.opcion-talla {
+    min-width: 55px;
+
+    padding: 9px 16px;
+}
+
+
+/* ==================================================
+   OPCIÓN AGOTADA
+================================================== */
+
+.opcion-boton.opcion-agotada {
+    background-color: #eeeeee;
+
+    color: #999999;
+
+    border-color: #d0d0d0;
+
+    cursor: not-allowed;
+
+    text-decoration: line-through;
+
+    transform: none;
+}
+
+
+.opcion-boton.opcion-agotada:hover {
+    border-color: #d0d0d0;
+
+    transform: none;
+}
+
+
+/* ==================================================
+   DISPONIBILIDAD
+================================================== */
+
+.producto-disponibilidad {
+    margin-top: 16px;
+
+    margin-bottom: 0;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #e1ddcf;
+
+    font-family: "Alegreya", serif;
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+    color: #555555;
+}
+
+
+/* ==================================================
    DESCRIPCIÓN
 ================================================== */
 
@@ -160,6 +365,7 @@
     font-family: "Alegreya", serif;
 
     font-size: 24px;
+
     font-weight: normal;
 
     margin-bottom: 10px;
@@ -208,34 +414,49 @@
 
 
 /* ==================================================
-   BOTÓN VOLVER
+   BOTONES DEL PRODUCTO
 ================================================== */
 
-.boton-volver {
+.producto-botones {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    margin-top: 35px;
+}
+
+
+.producto-botones .boton-volver {
     display: inline-block;
 
-    padding: 12px 25px;
+    padding: 12px 30px;
 
-    border: 2px solid var(--color-dorado);
+    background-color: #000000;
 
-    background-color: var(--color-dorado);
+    color: #B8AD81;
 
-    color: var(--color-negro);
+    border: 2px solid #B8AD81;
+
+    border-radius: 6px;
 
     text-decoration: none;
 
     font-family: "Alegreya", serif;
 
-    font-size: 17px;
+    font-size: 18px;
 
     transition: all 0.3s ease;
 }
 
 
-.boton-volver:hover {
-    background-color: transparent;
+.producto-botones .boton-volver:hover {
+    background-color: #B8AD81;
 
-    color: var(--color-dorado);
+    color: #000000;
 }
 
 
@@ -251,6 +472,7 @@
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     background-color: var(--color-crema);
@@ -277,23 +499,28 @@
         padding: 60px 25px;
     }
 
+
     .producto-galeria {
         max-width: 500px;
     }
+
 
     .producto-detalle-informacion h1 {
         font-size: 55px;
     }
 
+
     .producto-precio {
         font-size: 25px;
     }
+
 
     .producto-miniaturas {
         grid-template-columns: repeat(5, 1fr);
 
         gap: 8px;
     }
+
 
 }
 
@@ -359,6 +586,48 @@
     }
 
 
+    /* ----------------------------------------------
+       VARIANTES EN MÓVIL
+    ---------------------------------------------- */
+
+    .producto-variantes {
+        width: 100%;
+
+        padding: 16px;
+
+        margin-top: 20px;
+    }
+
+
+    .producto-opcion {
+        text-align: left;
+    }
+
+
+    .producto-opciones-botones {
+        gap: 8px;
+    }
+
+
+    .opcion-boton {
+        padding: 10px 15px;
+
+        font-size: 16px;
+    }
+
+
+    .opcion-talla {
+        min-width: 52px;
+
+        padding: 9px 14px;
+    }
+
+
+    .producto-disponibilidad {
+        text-align: left;
+    }
+
+
     .producto-descripcion p {
         font-size: 17px;
     }
@@ -403,48 +672,23 @@
         font-size: 22px;
     }
 
-}
+
+    .producto-variantes {
+        padding: 14px;
+    }
 
 
-/* ==================================================
-BOTONES DEL PRODUCTO
-================================================== */
+    .opcion-boton {
+        padding: 9px 13px;
 
-.producto-botones {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    gap: 15px;
-
-    margin-top: 35px;
-}
+        font-size: 15px;
+    }
 
 
-/* ==================================================
-BOTÓN VOLVER
-================================================== */
+    .opcion-talla {
+        min-width: 48px;
 
-.producto-botones .boton-volver {
-    display: inline-block;
+        padding: 8px 12px;
+    }
 
-    padding: 12px 30px;
-
-    background-color: #000000;
-    color: #B8AD81;
-
-    border: 2px solid #B8AD81;
-    border-radius: 6px;
-
-    text-decoration: none;
-
-    font-family: "Alegreya", serif;
-    font-size: 18px;
-
-    transition: all 0.3s ease;
-}
-
-.producto-botones .boton-volver:hover {
-    background-color: #B8AD81;
-    color: #000000;
 }

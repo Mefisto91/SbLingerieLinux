@@ -8,9 +8,7 @@ from ..models.ProductImage import ProductImage
 
 
 class HomeViewClass(View):
-
     def get(self, request):
-
         imagenes_principales = ProductImage.objects.filter(
             is_primary=True
         )
@@ -35,7 +33,7 @@ class HomeViewClass(View):
                 queryset=imagenes_principales,
                 to_attr="imagenes_principales"
             )
-        )[:6]
+        )[:4]
 
         return render(
             request,

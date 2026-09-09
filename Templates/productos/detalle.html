@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load currency %}
 
 {% block title %}
 {{ producto.name }} | SBLingerie
 {% endblock %}
+
 
 {% block extra_css %}
 
@@ -102,9 +104,77 @@
 
 
         <p class="producto-precio">
-            ${{ producto.price }}
+            {{ producto.price|pesos }}
         </p>
 
+
+        <!-- ==================================================
+             VARIANTES
+        ================================================== -->
+
+        {% if producto.variants.all %}
+
+            <div class="producto-variantes">
+
+    <!-- ==============================
+         COLOR
+    =============================== -->
+
+    <div class="producto-opcion">
+
+        <label>
+            Color
+        </label>
+
+        <div
+            id="colores"
+            class="producto-opciones-botones"
+            role="group"
+            aria-label="Selecciona un color"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         TALLA
+    =============================== -->
+
+    <div class="producto-opcion">
+
+        <label>
+            Talla
+        </label>
+
+        <div
+            id="tallas"
+            class="producto-opciones-botones producto-tallas"
+            role="group"
+            aria-label="Selecciona una talla"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         DISPONIBILIDAD
+    ============================== -->
+
+    <p
+        id="disponibilidad"
+        class="producto-disponibilidad"
+    ></p>
+
+</div>
+
+        {% endif %}
+
+
+        <!-- ==================================================
+             DESCRIPCIÓN
+        ================================================== -->
 
         {% if producto.description %}
 
@@ -122,6 +192,10 @@
 
         {% endif %}
 
+
+        <!-- ==================================================
+             CATEGORÍA
+        ================================================== -->
 
         <div class="producto-categoria">
 
@@ -167,47 +241,458 @@
 
 
 <!-- ==================================================
-     JAVASCRIPT GALERÍA Y ZOOM
+     DATOS DE LAS VARIANTES
+================================================== -->
+
+{% if producto.variants.all %}
+
+    <script id="variantes-data" type="application/json">
+
+        [
+
+            {% for variante in producto.variants.all %}
+
+                {
+                    "color": "{{ variante.color|escapejs }}",
+                    "size": "{{ variante.size|escapejs }}",
+                    "quantity": {{ variante.available_quantity }}
+                }
+
+                {% if not forloop.last %},{% endif %}
+
+            {% endfor %}
+
+        ]
+
+    </script>
+
+{% endif %}
+
+
+<!-- ==================================================
+     JAVASCRIPT
+     GALERÍA
+     ZOOM
+     VARIANTES
 ================================================== -->
 
 <script>
 
-function cambiarImagen(url, miniatura) {
+/* ==================================================
+   VARIANTES DEL PRODUCTO
+================================================== */
+
+const variantesElement =
+    document.getElementById(
+        "variantes-data"
+    );
+
+
+if (variantesElement) {
+
+    const variantes =
+        JSON.parse(
+            variantesElement.textContent
+        );
+
+
+    const contenedorColores =
+        document.getElementById(
+            "colores"
+        );
+
+
+    const contenedorTallas =
+        document.getElementById(
+            "tallas"
+        );
+
+
+    const disponibilidad =
+        document.getElementById(
+            "disponibilidad"
+        );
+
+
+    let colorSeleccionado = "";
+
+
+    let tallaSeleccionada = "";
+
+
+    /* ==============================================
+       OBTENER COLORES ÚNICOS
+    ============================================== */
+
+    const colores =
+        [
+            ...new Set(
+                variantes.map(
+                    variante =>
+                        variante.color
+                )
+            )
+        ];
+
+
+    /* ==============================================
+       CREAR BOTONES DE COLOR
+    ============================================== */
+
+    colores.forEach(
+        function(color) {
+
+            const boton =
+                document.createElement(
+                    "button"
+                );
+
+
+            boton.type = "button";
+
+
+            boton.classList.add(
+                "opcion-boton"
+            );
+
+
+            boton.textContent =
+                color;
+
+
+            boton.setAttribute(
+                "aria-label",
+                `Color ${color}`
+            );
+
+
+            boton.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+
+
+            boton.addEventListener(
+                "click",
+                function() {
+
+                    seleccionarColor(
+                        color,
+                        boton
+                    );
+
+                }
+            );
+
+
+            contenedorColores.appendChild(
+                boton
+            );
+
+        }
+    );
+
+
+    /* ==============================================
+       SELECCIONAR COLOR
+    ============================================== */
+
+    function seleccionarColor(
+        color,
+        botonSeleccionado
+    ) {
+
+        colorSeleccionado =
+            color;
+
+
+        tallaSeleccionada =
+            "";
+
+
+        disponibilidad.textContent =
+            "";
+
+
+        /* ------------------------------------------
+           Actualizar estado visual
+        ------------------------------------------ */
+
+        const botonesColor =
+            contenedorColores.querySelectorAll(
+                ".opcion-boton"
+            );
+
+
+        botonesColor.forEach(
+            function(boton) {
+
+                boton.classList.remove(
+                    "opcion-boton-activo"
+                );
+
+
+                boton.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+            }
+        );
+
+
+        botonSeleccionado.classList.add(
+            "opcion-boton-activo"
+        );
+
+
+        botonSeleccionado.setAttribute(
+            "aria-pressed",
+            "true"
+        );
+
+
+        /* ------------------------------------------
+           Limpiar tallas
+        ------------------------------------------ */
+
+        contenedorTallas.innerHTML =
+            "";
+
+
+        /* ------------------------------------------
+           Buscar variantes del color
+        ------------------------------------------ */
+
+        const variantesColor =
+            variantes.filter(
+                variante =>
+                    variante.color ===
+                    color
+            );
+
+
+        /* ------------------------------------------
+           Crear botones de talla
+        ------------------------------------------ */
+
+        variantesColor.forEach(
+            function(variante) {
+
+                const boton =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                boton.type = "button";
+
+
+                boton.classList.add(
+                    "opcion-boton",
+                    "opcion-talla"
+                );
+
+
+                boton.textContent =
+                    variante.size;
+
+
+                boton.setAttribute(
+                    "aria-label",
+                    `Talla ${variante.size}`
+                );
+
+
+                boton.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+
+                /* ----------------------------------
+                   Talla agotada
+                ---------------------------------- */
+
+                if (
+                    variante.quantity <= 0
+                ) {
+
+                    boton.disabled =
+                        true;
+
+
+                    boton.classList.add(
+                        "opcion-agotada"
+                    );
+
+
+                    boton.title =
+                        "Agotado";
+
+                }
+
+
+                /* ----------------------------------
+                   Seleccionar talla
+                ---------------------------------- */
+
+                else {
+
+                    boton.addEventListener(
+                        "click",
+                        function() {
+
+                            seleccionarTalla(
+                                variante,
+                                boton
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                contenedorTallas.appendChild(
+                    boton
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ==============================================
+       SELECCIONAR TALLA
+    ============================================== */
+
+    function seleccionarTalla(
+        variante,
+        botonSeleccionado
+    ) {
+
+        tallaSeleccionada =
+            variante.size;
+
+
+        /* ------------------------------------------
+           Actualizar botones
+        ------------------------------------------ */
+
+        const botonesTalla =
+            contenedorTallas.querySelectorAll(
+                ".opcion-talla"
+            );
+
+
+        botonesTalla.forEach(
+            function(boton) {
+
+                boton.classList.remove(
+                    "opcion-boton-activo"
+                );
+
+
+                boton.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+            }
+        );
+
+
+        botonSeleccionado.classList.add(
+            "opcion-boton-activo"
+        );
+
+
+        botonSeleccionado.setAttribute(
+            "aria-pressed",
+            "true"
+        );
+
+
+        /* ------------------------------------------
+           Mostrar disponibilidad
+        ------------------------------------------ */
+
+        if (
+            variante.quantity <= 0
+        ) {
+
+            disponibilidad.textContent =
+                "Agotado";
+
+        }
+
+        else {
+
+            disponibilidad.textContent =
+                `Disponible: ${variante.quantity} unidades`;
+
+        }
+
+    }
+
+}
+
+/* ==================================================
+   CAMBIAR IMAGEN
+================================================== */
+
+function cambiarImagen(
+    url,
+    miniatura
+) {
 
     const imagenPrincipal =
-        document.getElementById("imagen-principal");
+        document.getElementById(
+            "imagen-principal"
+        );
 
 
     if (imagenPrincipal) {
 
-        imagenPrincipal.src = url;
+        imagenPrincipal.src =
+            url;
+
 
         /*
-         * Cada vez que cambiamos de imagen,
-         * el zoom vuelve al centro.
+         * Cada vez que cambiamos
+         * de imagen, el zoom vuelve
+         * al centro.
          */
 
         imagenPrincipal.style.transformOrigin =
             "center center";
+
     }
 
 
     const miniaturas =
-        document.querySelectorAll(".miniatura");
-
-
-    miniaturas.forEach(function(elemento) {
-
-        elemento.classList.remove(
-            "miniatura-activa"
+        document.querySelectorAll(
+            ".miniatura"
         );
 
-    });
+
+    miniaturas.forEach(
+        function(elemento) {
+
+            elemento.classList.remove(
+                "miniatura-activa"
+            );
+
+        }
+    );
 
 
     miniatura.classList.add(
         "miniatura-activa"
     );
+
 }
 
 
@@ -227,12 +712,16 @@ const imagenPrincipal =
     );
 
 
-if (contenedorImagen && imagenPrincipal) {
+if (
+    contenedorImagen &&
+    imagenPrincipal
+) {
 
 
     /*
-     * Cuando el cursor entra en la imagen,
-     * activamos el zoom.
+     * Cuando el cursor entra
+     * en la imagen, activamos
+     * el zoom.
      */
 
     contenedorImagen.addEventListener(
@@ -249,9 +738,7 @@ if (contenedorImagen && imagenPrincipal) {
 
     /*
      * Mientras movemos el cursor,
-     * calculamos exactamente dónde está
-     * y hacemos que el zoom se enfoque
-     * en ese punto.
+     * calculamos dónde está ubicado.
      */
 
     contenedorImagen.addEventListener(
@@ -263,11 +750,13 @@ if (contenedorImagen && imagenPrincipal) {
 
 
             const x =
-                evento.clientX - rect.left;
+                evento.clientX -
+                rect.left;
 
 
             const y =
-                evento.clientY - rect.top;
+                evento.clientY -
+                rect.top;
 
 
             const porcentajeX =
@@ -287,8 +776,7 @@ if (contenedorImagen && imagenPrincipal) {
 
     /*
      * Cuando sacamos el cursor,
-     * quitamos el zoom y devolvemos
-     * el punto de origen al centro.
+     * quitamos el zoom.
      */
 
     contenedorImagen.addEventListener(

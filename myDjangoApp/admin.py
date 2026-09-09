@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models.CategoryModel import Category
 from .models.ProductModel import Product
 from .models.ProductImage import ProductImage
+from .models.ProductVariant import ProductVariant
 
 
 @admin.register(Category)
@@ -17,9 +18,15 @@ class ProductImageInline(admin.TabularInline):
     extra = 1
 
 
+class ProductVariantInline(admin.TabularInline):
+    model = ProductVariant
+    extra = 1
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = (
+        "reference",
         "name",
         "category",
         "price",
@@ -30,10 +37,13 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
     search_fields = (
+        "reference",
         "name",
         "description",
+        "material",
     )
 
     inlines = [
         ProductImageInline,
+        ProductVariantInline,
     ]
