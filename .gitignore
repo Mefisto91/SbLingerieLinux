@@ -1,7 +1,33 @@
-#Entorno virtual
-.myEnv
+# Entorno virtual
+venv/
+env/
+.venv/
+myEnviroment/
+myEnvApp/
 
-#Variables de entorno
+# Variables de entorno
+.env
 env
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 
+# Django
+*.log
+db.sqlite3
+
+# Archivos estáticos generados
+staticfiles/
+
+# Archivos multimedia
+media/
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

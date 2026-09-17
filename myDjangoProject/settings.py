@@ -13,13 +13,18 @@ environ.Env.read_env(BASE_DIR / "env")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = ['*']
+DEBUG = env.bool("DEBUG", default=True)
+
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS",
+    default=[
+        "127.0.0.1",
+        "localhost",
+    ]
+)
 
 
 # Application definition
@@ -75,16 +80,16 @@ WSGI_APPLICATION = 'myDjangoProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'SbLingerieDB',
-        'USER': 'sa',
-        'PASSWORD': 'Mefisto1991Link0#*',
-        'HOST': '127.0.0.1',
-        'PORT': '1433',
+        'NAME': env("DB_NAME"),
+        'USER': env("DB_USER"),
+        'PASSWORD': env("DB_PASSWORD"),
+        'HOST': env("DB_HOST"),
+        'PORT': env("DB_PORT"),
         'OPTIONS': {
             'driver': 'ODBC Driver 18 for SQL Server',
-            'encrypt': 'True',  # Mantiene la encriptación activa requerida por Driver 18
-            'trust_server_certificate': 'True',  # <-- Esta sintaxis alternativa obliga al conector a confiar
-            'extra_params': 'Encrypt=yes;TrustServerCertificate=yes;', # Con ambas banderas explícitas en mayúscula
+            'encrypt': 'True',
+            'trust_server_certificate': 'True',
+            'extra_params': 'Encrypt=yes;TrustServerCertificate=yes;',
         },
     },
 }
@@ -130,6 +135,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files (imágenes de productos)
 MEDIA_URL = '/media/'
@@ -138,8 +144,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}

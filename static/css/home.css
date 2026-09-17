@@ -119,57 +119,116 @@ CATEGORÍAS DEL HOME
 }
 
 /* ==================================================
+
 PRODUCTOS DESTACADOS
+
 ================================================== */
 
 .productos-destacados {
+
     padding: 80px 30px;
+
     background-color: #f8f7f3;
+
 }
 
 .productos-grid {
+
     max-width: 1200px;
+
     margin: 0 auto;
+
     display: grid;
+
     grid-template-columns: repeat(4, 1fr);
+
     gap: 30px;
+
 }
 
 .producto-card {
+
+    display: block;
+
+    text-decoration: none;
+
+    color: #000000;
+
     background-color: #ffffff;
+
     text-align: center;
+
     padding-bottom: 20px;
+
     transition: transform 0.3s ease;
+
+}
+
+.producto-card:link,
+.producto-card:visited,
+.producto-card:hover,
+.producto-card:active {
+
+    text-decoration: none;
+
+    color: #000000;
+
 }
 
 .producto-card:hover {
+
     transform: translateY(-5px);
+
 }
 
 .producto-card img {
+
     width: 100%;
+
     aspect-ratio: 1 / 1;
+
     object-fit: cover;
+
     display: block;
+
 }
 
 .producto-card h3 {
+
     font-family: "Alegreya", serif;
+
     font-size: 22px;
+
     font-weight: normal;
+
     margin-top: 15px;
+
+    color: #000000;
+
+    text-decoration: none;
+
 }
 
 .producto-card p {
+
     font-family: "Alegreya", serif;
+
     font-size: 18px;
+
     color: #B8AD81;
+
     margin: 8px 0;
+
+    text-decoration: none;
+
 }
 
 .productos-boton {
+
     text-align: center;
+
     margin-top: 40px;
+
 }
 
 /* ==================================================

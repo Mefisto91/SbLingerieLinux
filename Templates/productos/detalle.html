@@ -3,9 +3,24 @@
 {% load currency %}
 
 {% block title %}
-{{ producto.name }} | SBLingerie
+SBLingerie
 {% endblock %}
 
+{% block meta_description %}
+{{ producto.description|striptags|truncatechars:160 }}
+{% endblock %}
+
+{% block og_description %}
+{{ producto.description|striptags|truncatechars:160 }}
+{% endblock %}
+
+{% block og_image %}
+{% for imagen in producto.images.all %}
+    {% if imagen.is_primary %}
+        {{ imagen.image.url }}
+    {% endif %}
+{% endfor %}
+{% endblock %}
 
 {% block extra_css %}
 
@@ -218,6 +233,16 @@
 
         <div class="producto-botones">
 
+            <button
+                type="button"
+                id="boton-whatsapp"
+                class="boton-whatsapp"
+                disabled
+            >
+                Comprar por WhatsApp
+            </button>
+
+
             <a
                 href="{% url 'myDjangoApp:categoria' slug=producto.category.slug %}"
                 class="boton-volver"
@@ -234,11 +259,6 @@
             </a>
 
         </div>
-
-    </div>
-
-</section>
-
 
 <!-- ==================================================
      DATOS DE LAS VARIANTES
@@ -312,6 +332,12 @@ if (variantesElement) {
         document.getElementById(
             "disponibilidad"
         );
+
+
+    const botonWhatsapp =
+    document.getElementById(
+        "boton-whatsapp"
+    );  
 
 
     let colorSeleccionado = "";
@@ -409,9 +435,14 @@ if (variantesElement) {
         tallaSeleccionada =
             "";
 
-
         disponibilidad.textContent =
             "";
+
+        botonWhatsapp.disabled =
+            true;
+
+        botonWhatsapp.onclick =
+            null;
 
 
         /* ------------------------------------------
@@ -565,7 +596,7 @@ if (variantesElement) {
 
 
     /* ==============================================
-       SELECCIONAR TALLA
+    SELECCIONAR TALLA
     ============================================== */
 
     function seleccionarTalla(
@@ -578,7 +609,7 @@ if (variantesElement) {
 
 
         /* ------------------------------------------
-           Actualizar botones
+        Actualizar botones
         ------------------------------------------ */
 
         const botonesTalla =
@@ -616,7 +647,7 @@ if (variantesElement) {
 
 
         /* ------------------------------------------
-           Mostrar disponibilidad
+        Mostrar disponibilidad
         ------------------------------------------ */
 
         if (
@@ -626,18 +657,48 @@ if (variantesElement) {
             disponibilidad.textContent =
                 "Agotado";
 
+
+            botonWhatsapp.disabled =
+                true;
+
+            return;
+
         }
 
-        else {
 
-            disponibilidad.textContent =
-                `Disponible: ${variante.quantity} unidades`;
+        disponibilidad.textContent =
+            `Disponible: ${variante.quantity} unidades`;
 
+
+        /* ------------------------------------------
+        HABILITAR COMPRA POR WHATSAPP
+        ------------------------------------------ */
+
+        botonWhatsapp.disabled =
+            false;
+
+
+        botonWhatsapp.onclick =
+            function() {
+
+                const mensaje =
+                    `Hola, estoy interesado en el producto {{ producto.name|escapejs }}. ` +
+                    `Color: ${colorSeleccionado}. ` +
+                    `Talla: ${tallaSeleccionada}.`;
+
+
+                const url =
+                    `https://wa.me/573223642234?text=${encodeURIComponent(mensaje)}`;
+
+
+                window.open(
+                    url,
+                    "_blank"
+                );
+
+            };
         }
-
     }
-
-}
 
 /* ==================================================
    CAMBIAR IMAGEN
@@ -793,7 +854,6 @@ if (
 
         }
     );
-
 }
 
 </script>

@@ -6,6 +6,10 @@
     SBLingerie
 {% endblock %}
 
+{% block meta_description %}
+Descubre SBLingerie, una selección de lencería y joyería en plata 925, diseñada para realzar tu estilo con elegancia y sofisticación.
+{% endblock %}
+
 {% block extra_css %}
 
 <link rel="stylesheet" href="{% static 'css/home.css' %}" >
@@ -52,44 +56,71 @@
 </section> 
 
 
-<!-- ========================= PRODUCTOS DESTACADOS ========================= --> 
- <section class="productos-destacados">
+<!-- ========================= PRODUCTOS DESTACADOS ========================= -->
+
+<section class="productos-destacados">
+
     <div class="seccion-titulo">
+
         <h2>
             Productos destacados
         </h2>
+
         <p>
             Conoce algunos de nuestros productos favoritos.
         </p>
+
     </div>
 
+
     <div class="productos-grid">
+
         {% for producto in productos_destacados %}
-            <div class="producto-card">
+
+            <a
+                href="{% url 'myDjangoApp:producto_detalle' id=producto.id %}"
+                class="producto-card"
+            >
+
                 {% for imagen in producto.imagenes_principales %}
-                    <img src="{{ imagen.image.url }}" alt="{{ producto.name }}" class="producto-imagen">
+
+                    <img
+                        src="{{ imagen.image.url }}"
+                        alt="{{ producto.name }}"
+                        class="producto-imagen"
+                    >
 
                 {% empty %}
+
                     <div class="producto-sin-imagen">
                         Sin imagen
                     </div>
 
                 {% endfor %}
 
-                <h3>{{ producto.name }}</h3>
+
+                <h3>
+                    {{ producto.name }}
+                </h3>
+
 
                 <p>
                     {{ producto.price|pesos }}
                 </p>
-            </div>
+
+            </a>
+
         {% empty %}
 
             <p>
                 Próximamente encontrarás nuestros productos destacados.
             </p>
+
         {% endfor %}
+
     </div>
 
+</section>
 
 </section> <!-- ========================= SOBRE NOSOTROS ========================= --> <section class="sobre-nosotros">
     <div class="sobre-nosotros-imagen">

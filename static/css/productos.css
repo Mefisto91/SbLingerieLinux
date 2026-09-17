@@ -429,6 +429,48 @@
     margin-top: 35px;
 }
 
+.boton-whatsapp {
+
+    display: inline-block;
+
+    padding: 12px 30px;
+
+    background-color: #000000;
+
+    color: #B8AD81;
+
+    border: 2px solid #B8AD81;
+
+    border-radius: 6px;
+
+    font-family: "Alegreya", serif;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+
+.boton-whatsapp:hover {
+
+    background-color: #B8AD81;
+
+    color: #000000;
+}
+
+
+.boton-whatsapp:disabled {
+
+    background-color: #eeeeee;
+
+    color: #999999;
+
+    border-color: #d0d0d0;
+
+    cursor: not-allowed;
+}
 
 .producto-botones .boton-volver {
     display: inline-block;
