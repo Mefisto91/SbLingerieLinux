@@ -8,15 +8,16 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
-environ.Env.read_env(BASE_DIR / "env")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
+if (BASE_DIR / "env").exists():
+    environ.Env.read_env(BASE_DIR / "env")
 
 SECRET_KEY = env("SECRET_KEY")
 
-DEBUG = env.bool("DEBUG", default=True)
+
+DEBUG = env.bool("DEBUG", default=False)
+
 
 ALLOWED_HOSTS = env.list(
     "ALLOWED_HOSTS",
