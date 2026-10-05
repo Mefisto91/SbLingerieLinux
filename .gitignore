@@ -4,6 +4,7 @@ env/
 .venv/
 myEnviroment/
 myEnvApp/
+.myEnv/
 
 # Variables de entorno
 .env
@@ -31,3 +32,6 @@ media/
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# Backups de base de datos
+sblingerie_backup.sql
