@@ -23,7 +23,9 @@ db.sqlite3
 staticfiles/
 
 # Archivos multimedia
-media/
+media/*
+!media/productos/
+!media/productos/**
 
 # IDE
 .vscode/
