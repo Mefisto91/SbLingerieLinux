@@ -4,7 +4,7 @@ from django.conf import settings
 from django.views.static import serve
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("20sb91-gestion-sbl-colombia/", admin.site.urls),
     path("", include("myDjangoApp.urls", namespace="myDjangoApp")),
 ]
 
