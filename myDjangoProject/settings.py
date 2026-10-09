@@ -27,6 +27,12 @@ ALLOWED_HOSTS = env.list(
     ]
 )
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://sblingeriecolombia.com",
+    "https://www.sblingeriecolombia.com",
+    "https://sblingerielinux-production.up.railway.app",
+]
+
 SECURE_SSL_REDIRECT = env.bool(
     "SECURE_SSL_REDIRECT",
     default=False
